@@ -137,7 +137,11 @@ export default function Order() {
                     </Button>
                 </Paper>
             </Box>
-            <OrderHistory />
+            <Paper sx={{ marginTop: 4, padding: 2 }}>
+                <Typography variant="h4">История</Typography>
+
+                <OrderHistory withId />
+            </Paper>
 
         </OrderContext.Provider>
     )

@@ -1,19 +1,19 @@
 import { Dialog, DialogContent, DialogTitle, IconButton, TableCell, TableRow } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { MenuContext, MenuItemType } from "./Menu";
 import { useContext, useState } from "react";
-import MenuForm from "./MenuForm";
+import ProductForm from "./ProductForm";
+import { ProductItemType, ProductsContext } from "./Products";
 
-type MenuItemProps = {
-    item: MenuItemType;
+type ProductItemProps = {
+    item: ProductItemType;
     editable?: boolean;
     onRemove?: (id: string) => void;
 };
 
-const MenuItem = ({ item, editable, onRemove }: MenuItemProps) => {
+const ProductItem = ({ item, editable, onRemove }: ProductItemProps) => {
     const [open, setOpen] = useState(false);
-    const { update } = useContext(MenuContext)
+    const { update } = useContext(ProductsContext)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -27,9 +27,9 @@ const MenuItem = ({ item, editable, onRemove }: MenuItemProps) => {
             onRemove(item._id);
     };
 
-    const handleSave = (label: string, price: string) => {
+    const handleSave = (label: string, remaining: string) => {
         window.api
-            .updateMenuItem(item._id, { label, price: Number(price) })
+            .updateProduct(item._id, { label, remaining: Number(remaining) })
             .then(() => {
                 handleClose()
                 update()
@@ -39,7 +39,7 @@ const MenuItem = ({ item, editable, onRemove }: MenuItemProps) => {
     return (
         <TableRow key={item._id}>
             <TableCell>{item.label}</TableCell>
-            <TableCell>{item.price}</TableCell>
+            <TableCell>{item.remaining}</TableCell>
             {editable &&
                 <>
                     <TableCell>
@@ -53,10 +53,10 @@ const MenuItem = ({ item, editable, onRemove }: MenuItemProps) => {
                     <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>{item.label}</DialogTitle>
                         <DialogContent>
-                            <MenuForm
+                            <ProductForm
                                 handler={handleSave}
                                 label={item.label}
-                                price={item.price.toString()}
+                                price={item.remaining.toString()}
                             />
                         </DialogContent>
                     </Dialog>
@@ -66,4 +66,4 @@ const MenuItem = ({ item, editable, onRemove }: MenuItemProps) => {
     );
 };
 
-export default MenuItem;
+export default ProductItem;

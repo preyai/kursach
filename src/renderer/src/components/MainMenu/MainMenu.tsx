@@ -4,11 +4,16 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { useNavigate } from "react-router-dom";
-import { Group, MenuBook, PointOfSale, Warehouse } from "@mui/icons-material";
+import { Group, Home, MenuBook, PointOfSale, Warehouse } from "@mui/icons-material";
 
 export default function MainMenu() {
     const navigate = useNavigate()
     const menu = [
+        {
+            label: "Главная",
+            path: "/",
+            icon: <Home/>
+        },
         {
             label: "Меню",
             path: "/menu",
@@ -26,7 +31,7 @@ export default function MainMenu() {
         },
         {
             label: "Склад",
-            path: "/menu",
+            path: "/products",
             icon: <Warehouse/>
         },
     ]

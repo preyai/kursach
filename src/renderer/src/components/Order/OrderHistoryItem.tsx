@@ -8,6 +8,7 @@ import { UserItemType } from "../Users/Users";
 
 type OrderHistoryItemProps = {
     order: OrderType
+    withId?: boolean
 }
 
 type OrderItemType = {
@@ -17,7 +18,7 @@ type OrderItemType = {
     quantity: number;
 }
 
-export default function OrderHistoryItem({ order }: OrderHistoryItemProps) {
+export default function OrderHistoryItem({ order, withId }: OrderHistoryItemProps) {
     const [positions, setPositions] = useState<OrderItemType[]>([])
     const [user, setUser] = useState<UserItemType>()
 
@@ -40,7 +41,9 @@ export default function OrderHistoryItem({ order }: OrderHistoryItemProps) {
     return (
 
         <TableRow>
-            <TableCell>{order._id}</TableCell>
+            {withId &&
+                <TableCell>{order._id}</TableCell>
+            }
             <TableCell>{moment(order.createdAt).format('lll')}</TableCell>
             <TableCell>{user?.fio}</TableCell>
             <TableCell>{positions.map(position => (

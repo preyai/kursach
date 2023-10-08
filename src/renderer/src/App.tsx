@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Menu from "./components/Menu";
 import Users from "./components/Users";
 import Order from "./components/Order";
+import Products from "./components/Products";
 
 
 export default function App() {
@@ -33,15 +34,17 @@ export default function App() {
           path: "/order",
           element: <Order />,
         },
+        {
+          path: "/products",
+          element: <Products />,
+        },
       ],
     },
   ]);
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <MainContainer> */}
         <RouterProvider router={router} />
-      {/* </MainContainer> */}
     </ThemeProvider>
   );
 }

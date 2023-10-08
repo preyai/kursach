@@ -22,18 +22,21 @@ export const api = {
   getAllOrders: () => ipcRenderer.invoke('get-all-orders'),
   findOrders: (query) => ipcRenderer.invoke('find-orders', query),
   addOrder: (item) => ipcRenderer.invoke('add-orders', item),
+  updateOrder: (id, item) => ipcRenderer.invoke('update-orders', id, item),
   removeOrder: (id) => ipcRenderer.invoke('remove-orders', id),
 
   getOrderItem: (id) => ipcRenderer.invoke('get-orderItems', id),
   getAllOrderItems: () => ipcRenderer.invoke('get-all-orderItems'),
   findOrderItems: (query) => ipcRenderer.invoke('find-orderItems', query),
   addOrderItem: (item) => ipcRenderer.invoke('add-orderItems', item),
+  updateOrderItem: (id, item) => ipcRenderer.invoke('update-orderItems', id, item),
   removeOrderItem: (id) => ipcRenderer.invoke('remove-orderItems', id),
 
   getProduct: (id) => ipcRenderer.invoke('get-products', id),
   getAllProducts: () => ipcRenderer.invoke('get-all-products'),
   findProducts: (query) => ipcRenderer.invoke('find-products', query),
   addProduct: (item) => ipcRenderer.invoke('add-products', item),
+  updateProduct: (id, item) => ipcRenderer.invoke('update-products', id, item),
   removeProduct: (id) => ipcRenderer.invoke('remove-products', id)
 }
 

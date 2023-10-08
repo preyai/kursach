@@ -38,7 +38,7 @@ export default function Menu() {
 
     return (
         <MenuContext.Provider value={{ update }} >
-            <MenuList menu={menu} onRemove={handleRemove} />
+            <MenuList menu={menu} onRemove={handleRemove} editable={true} />
             <MenuForm
                 handler={handleAdd}
                 buttonText="добавить"

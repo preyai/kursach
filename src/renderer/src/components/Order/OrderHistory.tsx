@@ -3,14 +3,21 @@ import { useContext, useEffect, useState } from "react";
 import OrderHistoryItem from "./OrderHistoryItem";
 import { OrderContext, OrderType } from "./Order";
 
+interface OrderHistoryProps {
+    withId?: boolean
+    limit?: number
+}
 
-export default function OrderHistory() {
+export default function OrderHistory(props: OrderHistoryProps) {
     const [orders, setOrders] = useState<OrderType[]>([])
     const { positions } = useContext(OrderContext)
 
     const update = async () => {
-        const list = await window.api.getAllOrders();
-        setOrders(list as OrderType[]);
+        const list: OrderType[] = await window.api.getAllOrders();
+        list.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+        if (props.limit)
+            list.splice(props.limit)
+        setOrders(list);
     };
 
     useEffect(() => {
@@ -18,24 +25,23 @@ export default function OrderHistory() {
     }, [positions])
 
     return (
-        <Box sx={{ marginTop: 2 }}>
-            <Typography variant="h4">История</Typography>
-            <Table>
-                <TableHead>
-                    <TableRow>
+        <Table>
+            <TableHead>
+                <TableRow>
+                    {props.withId &&
                         <TableCell>ID</TableCell>
-                        <TableCell>Дата</TableCell>
-                        <TableCell>Кассир</TableCell>
-                        <TableCell>Позиции</TableCell>
-                        <TableCell>Сумма</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {orders.sort((a,b)=> b.createdAt.getTime() - a.createdAt.getTime()).map(order => (
-                        <OrderHistoryItem order={order} key={order._id} />
-                    ))}
-                </TableBody>
-            </Table>
-        </Box>
+                    }
+                    <TableCell>Дата</TableCell>
+                    <TableCell>Кассир</TableCell>
+                    <TableCell>Позиции</TableCell>
+                    <TableCell>Сумма</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {orders.map(order => (
+                    <OrderHistoryItem order={order} key={order._id} withId={props.withId} />
+                ))}
+            </TableBody>
+        </Table>
     )
 }

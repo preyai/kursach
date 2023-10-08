@@ -1,27 +1,27 @@
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import MenuItem from "./MenuItem";
-import { MenuItemType } from "./Menu";
+import MenuItem from "./ProductItem";
+import { ProductItemType } from "./Products";
 
-type MenuListProps = {
-  menu: MenuItemType[];
+type ProductListProps = {
+  products: ProductItemType[];
   editable?: boolean;
   onRemove?: (id: string) => void;
 };
 
-const MenuList = ({ menu, editable, onRemove }: MenuListProps) => {
+const ProductsList = ({ products, editable, onRemove }: ProductListProps) => {
   return (
     <Table>
       <TableHead>
         <TableRow>
           <TableCell>Название</TableCell>
-          <TableCell>Цена</TableCell>
+          <TableCell>Остаток</TableCell>
           {editable &&
             <TableCell>Действия</TableCell>
           }
         </TableRow>
       </TableHead>
       <TableBody>
-        {menu.map((item) => (
+        {products.map((item) => (
           <MenuItem key={item._id} item={item} onRemove={onRemove} editable={editable} />
         ))}
       </TableBody>
@@ -29,4 +29,4 @@ const MenuList = ({ menu, editable, onRemove }: MenuListProps) => {
   );
 };
 
-export default MenuList;
+export default ProductsList;

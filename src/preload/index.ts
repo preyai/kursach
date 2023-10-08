@@ -8,7 +8,7 @@ export const api = {
   getAllUsers: () => ipcRenderer.invoke('get-all-users'),
   findUsers: (query) => ipcRenderer.invoke('find-users', query),
   addUser: (item) => ipcRenderer.invoke('add-users', item),
-  updateUser: (id, item) => ipcRenderer.invoke('update-user', id, item),
+  updateUser: (id, item) => ipcRenderer.invoke('update-users', id, item),
   removeUser: (id) => ipcRenderer.invoke('remove-users', id),
 
   getMenuItem: (id) => ipcRenderer.invoke('get-menu', id),
